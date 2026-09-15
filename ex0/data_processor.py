@@ -91,13 +91,13 @@ class LogProcessor(DataProcessor):
         if isinstance(data, list):
             for item in data:
                 self._data.append(
-                    f"{item.get("log_level", "UKNOWN")}: {
-                        item.get("log_message", "UKNOWN")}"
+                    f"{item.get('log_level', 'UNKNOWN')}: {
+                        item.get('log_message', 'UNKNOWN')}"
                     )
         else:
             self._data.append(
-                f"{data.get("log_level", "UKNOWN")}: {
-                    data.get("log_message", "UKNOWN")}"
+                f"{data.get('log_level', 'UNKNOWN')}: {
+                    data.get('log_message', 'UNKNOWN')}"
                 )
 
 
@@ -106,16 +106,16 @@ def main() -> None:
     print()
     print("Testing Numeric Processor...")
     numeric: NumericProcessor = NumericProcessor()
-    testing_data: Any = "42"
+    testing_data: Any = 42
     is_valid: bool = numeric.validate(testing_data)
     print(f"Trying to validate testing_data '{testing_data}': {is_valid}")
     testing_data = "Hello"
     is_valid = numeric.validate(testing_data)
     print(f"Trying to validate testing_data '{testing_data}': {is_valid}")
-    print(
-        f"Test invalid ingestion of string '{testing_data}'"
-        "without prior validation:")
     testing_data = "foo"
+    print(
+        f"Test invalid ingestion of string '{testing_data}' "
+        "without prior validation:")
     try:
         numeric.ingest(testing_data)
     except TypeError as error:
