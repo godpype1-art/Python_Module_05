@@ -67,7 +67,7 @@ class TextProcessor(DataProcessor):
 
 class LogProcessor(DataProcessor):
 
-    def validate(self, data: Any) -> bool:
+    def validate(self, data: Any):
         if isinstance(data, dict):
             return all(
                 isinstance(key, str)
@@ -91,13 +91,13 @@ class LogProcessor(DataProcessor):
         if isinstance(data, list):
             for item in data:
                 self._data.append(
-                    f"{item.get('log_level', 'UNKNOWN')}: {
-                        item.get('log_message', 'UNKNOWN')}"
+                    f"{item.get('log_level', 'UNKNOWN')}: "
+                    f"{item.get('log_message', 'UNKNOWN')}"
                     )
         else:
             self._data.append(
-                f"{data.get('log_level', 'UNKNOWN')}: {
-                    data.get('log_message', 'UNKNOWN')}"
+                f"{data.get('log_level', 'UNKNOWN')}: "
+                f"{data.get('log_message', 'UNKNOWN')}"
                 )
 
 
